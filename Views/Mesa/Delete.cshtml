@@ -1,0 +1,34 @@
+@model RestauranteReserva.Models.Mesa
+@{
+    ViewData["Title"] = "Excluir Mesa";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Confirmar Exclusão</h4>
+                </div>
+                <div class="card-body">
+                    <p>Tem certeza de que deseja excluir esta mesa?</p>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Número:</strong> Mesa @Model.Numero</li>
+                        <li class="list-group-item"><strong>Capacidade:</strong> @Model.Capacidade pessoas</li>
+                        <li class="list-group-item">
+                            <strong>Status:</strong>
+                            @(Model.Disponivel ? "Disponível" : "Ocupada")
+                        </li>
+                    </ul>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id"/>
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-danger">Sim, excluir</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

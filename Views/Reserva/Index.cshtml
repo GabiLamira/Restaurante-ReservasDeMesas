@@ -1,0 +1,47 @@
+@model IEnumerable<RestauranteReserva.Models.Reserva>
+@{
+    ViewData["Title"] = "Reservas";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>🍽️ Reservas</h2>
+        <a asp-action="Create" class="btn btn-success">+ Nova Reserva</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">Nenhuma reserva cadastrada ainda.</div>
+    }
+    else
+    {
+        <table class="table table-striped table-hover shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Cliente</th>
+                    <th>Telefone</th>
+                    <th>Data e Hora</th>
+                    <th>Pessoas</th>
+                    <th>Mesa</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model)
+                {
+                    <tr>
+                        <td>@r.NomeCliente</td>
+                        <td>@r.Telefone</td>
+                        <td>@r.DataHora.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@r.NumeroPessoas</td>
+                        <td>Mesa @r.Mesa?.Numero</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@r.Id" class="btn btn-sm btn-warning">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@r.Id" class="btn btn-sm btn-danger">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
